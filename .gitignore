@@ -6,3 +6,6 @@ out/
 
 .idea_modules/
 
+target/
+
+resources/
