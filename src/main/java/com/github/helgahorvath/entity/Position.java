@@ -2,11 +2,9 @@ package com.github.helgahorvath.entity;
 
 import lombok.Getter;
 import lombok.Setter;
+import net.minidev.json.annotate.JsonIgnore;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
@@ -16,6 +14,7 @@ public class Position {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @JsonIgnore
   private Long id;
 
   @Size(max = 50, min = 3, message = "Please enter a job title between 3 and 50 characters.")
@@ -25,4 +24,10 @@ public class Position {
   private String location;
 
   private String url;
+
+  @PostPersist
+  public void onSave() {
+    url = url + id;
+  }
+
 }
