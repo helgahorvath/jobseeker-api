@@ -1,10 +1,13 @@
 package com.github.helgahorvath.entity;
 
+import com.github.helgahorvath.repository.ClientRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.validation.ConstraintViolation;
@@ -16,10 +19,18 @@ import javax.validation.Validator;
 public class ClientTest {
 
   private Validator validator;
+  @Autowired
+  private ClientRepository clientRepository;
 
   @Before
   public void setup() {
     validator = Validation.buildDefaultValidatorFactory().getValidator();
+    clientRepository.deleteAll();
+    Client client = new Client();
+    client.setEmail("mmmmmmmm@nnnnn.com");
+    client.setName("valid name");
+    clientRepository.save(client);
+
   }
 
   @Test
@@ -44,6 +55,11 @@ public class ClientTest {
             ((ConstraintViolation) violation[0]).getMessage());
   }
 
-  // TODO email uniqueness
-
+  @Test(expected = DataIntegrityViolationException.class)
+  public void testEmailIsUnique() {
+    Client client = new Client();
+    client.setEmail("mmmmmmmm@nnnnn.com");
+    client.setName("name");
+    clientRepository.save(client);
+  }
 }
