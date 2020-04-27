@@ -5,7 +5,7 @@ import java.util.UUID;
 
 
 public interface ClientService {
-
   public void saveClient(Client client);
   public UUID generateApiKey();
+  public boolean isApiKeyValid(String apiKey);
 }

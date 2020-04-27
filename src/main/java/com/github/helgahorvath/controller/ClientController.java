@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
+import java.util.UUID;
 
 @RestController
 public class ClientController {
@@ -18,16 +18,10 @@ public class ClientController {
     this.clientService = clientService;
   }
 
-
   @PostMapping("/clients")
-  public void registerClient(@RequestBody Client client) {
+  public UUID registerClient(@RequestBody Client client) {
     clientService.saveClient(client);
-    // todo return api key
+    return clientService.generateApiKey();
   }
-
-
-
-
-
 
 }

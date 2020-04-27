@@ -17,12 +17,20 @@ public class ClientServiceImpl implements ClientService {
   }
 
   public void saveClient(Client client) {
-    // todo hiba
     clientRepository.save(client);
   }
 
   public UUID generateApiKey() {
-    // todo
-    return null;
+    String name = "name";
+    return UUID.nameUUIDFromBytes(name.getBytes());
+  }
+
+  public boolean isApiKeyValid(String apiKey) {
+    try {
+      UUID uuid = UUID.fromString(apiKey);
+    }catch (IllegalArgumentException e) {
+      return false;
+    }
+    return true;
   }
 }
