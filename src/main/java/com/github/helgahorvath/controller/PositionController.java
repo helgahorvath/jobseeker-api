@@ -5,6 +5,8 @@ import com.github.helgahorvath.service.PositionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
+
 
 @RestController
 public class PositionController {
@@ -14,7 +16,7 @@ public class PositionController {
   @Autowired
   PositionController(PositionService positionService) {
     this.positionService = positionService;
-  };
+  }
 
   @PostMapping("/positions")
   public String createPosition(@RequestBody Position position, HttpServletRequest request) {
@@ -25,4 +27,12 @@ public class PositionController {
     positionService.savePosition(position);
     return position.getUrl();
   }
+
+
+  @GetMapping("/positions")
+  public List<Position> getPositions(@RequestParam String jobTitle, String location) {
+    return positionService.getPositionList(jobTitle, location);
+  }
+
+
 }

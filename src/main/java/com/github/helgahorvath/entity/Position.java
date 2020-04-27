@@ -1,20 +1,19 @@
 package com.github.helgahorvath.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
-import net.minidev.json.annotate.JsonIgnore;
-
 import javax.persistence.*;
 import javax.validation.constraints.Size;
 
 @Entity
 @Setter
 @Getter
+@JsonIgnoreProperties(ignoreUnknown = true, value = {"id"})
 public class Position {
 
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @JsonIgnore
   private Long id;
 
   @Size(max = 50, min = 3, message = "Please enter a job title between 3 and 50 characters.")
