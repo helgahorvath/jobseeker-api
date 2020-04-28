@@ -5,10 +5,12 @@ import com.github.helgahorvath.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
 
 @RestController
+@RequestMapping("clients")
 public class ClientController {
 
   private ClientService clientService;
@@ -18,7 +20,7 @@ public class ClientController {
     this.clientService = clientService;
   }
 
-  @PostMapping("/clients")
+  @PostMapping
   public UUID registerClient(@RequestBody Client client) {
     clientService.saveClient(client);
     return clientService.generateApiKey();
