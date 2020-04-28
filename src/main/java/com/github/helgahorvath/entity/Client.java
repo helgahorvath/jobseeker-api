@@ -16,10 +16,9 @@ public class Client {
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Size(max = 50, min = 3, message = "Please enter a name between 0 and 50 characters.")
+  @Size(max = 100, min = 3, message = "Please enter a name between 3 and 100 characters.")
   private String name;
 
-  @Size(max = 50, message = "Please enter an email between 0 and 50 characters.")
   @Email(message = "Please enter a valid email")
   @Column(unique = true)
   private String email;

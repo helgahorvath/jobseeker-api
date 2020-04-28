@@ -41,17 +41,17 @@ public class ClientTest {
   }
 
   @Test
-  public void testEmailLengthMax50Character() {
-    Object[] violation = validator.validateValue(Client.class, "email",
-            "veryveryloooooooongemail@morethan50character.invalid").toArray();
-    Assertions.assertEquals("Please enter an email between 0 and 50 characters.",
+  public void testNameLengthMax100Character() {
+    Object[] violation = validator.validateValue(Client.class, "name",
+            "namnemneamneemnaenmanmae namenamen naemanemnmae m nmae namen nmae name namn namne nnmaenmmmnema snsnsnsn").toArray();
+    Assertions.assertEquals("Please enter a name between 3 and 100 characters.",
             ((ConstraintViolation) violation[0]).getMessage());
   }
 
   @Test
   public void testNameLengthMin3Character() {
     Object[] violation = validator.validateValue(Client.class, "name","no").toArray();
-    Assertions.assertEquals("Please enter a name between 0 and 50 characters.",
+    Assertions.assertEquals("Please enter a name between 3 and 100 characters.",
             ((ConstraintViolation) violation[0]).getMessage());
   }
 
